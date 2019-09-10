@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 600px;
+            position: relative;
+        }
+
+        ul {
+            width: 100%;
+            width: 100%;
+
+            border: 2px solid #666666;
+            border-radius: 10px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        li {
+            padding: 0 8px;
+            margin: 2px;
+            background: #cccccc;
+            float: left;
+            line-height: 30px;
+            border-radius: 10px;
+            clear: both;
+
+
+        }
+
+        .my-msg {
+            float: right;
+            background: #58bc58;
+            color: #ffffff;
+        }
+
+        textarea {
+            margin: 5px;
+            width: 100%;
+            min-height: 50px;
+
+        }
+
+        .status {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #555555;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul></ul>
+        <textarea class="text"></textarea>
+        <button>发送消息</button>
+        <div class="status">对方正在输入中....</div>
+    </div>
+    <script>
+        var oList = document.querySelector("ul");
+        var oSend = document.querySelector("button")
+        var oText = document.querySelector(".text")
+        var oStatus = document.querySelector(".status");
+        // 获得焦点
+        oText.focus();
+        /* 思路：当点击发送消息标签的时候，先获取输入框中的内容，然后根据该内容来创建标签，显示在页面中 */
+        oSend.onclick = function () {
+            var oTextValue = oText.value.trim();
+            if (oTextValue.length == 0) {
+                alert("请输入具体的消息");
+                return;
+            }
+            var oLi = document.createElement("li");
+            oLi.innerText = oTextValue;
+            oLi.className = "my-msg"
+            oList.appendChild(oLi);
+            // 发送消息后，清理输入框的内容
+            oText.value = "";
+            oText.focus();
+            // 机器人自动回复我
+            var responseText = "";
+            var oResponseLi = document.createElement("li");
+            var arrA = ["你好", "你有什么爱好？", "你在哪里呀？", "你会说粤语吗？", "一天天的脑子里想些什么呢？", "你左手有几个手指？", "你有几个眼睛？", "你有几个嘴巴？", "嗯，我也爱你"]
+            var arrR = ["你好呀~", "喜欢你算不算?", "我在你心里", "会说想你的粤语", "想你​​​​", "5", "2", "1", "哈哈,被你套路到了"]
+            var index = arrA.indexOf(oTextValue);
+            if (index == -1) {
+                responseText = "我累啦，宝贝，晚安喔！~"
+            } else {
+                var item = arrR[index];
+                if (Array.isArray(item)) {
+                    var i = getNumberWithRange(0, item.length - 1);
+                    responseText = item[i];
+                } else {
+                    responseText = item;
+                }
+            }
+            oResponseLi.innerText = responseText
+            // 显示对方正在输入
+            oStatus.style.display = "block";
+            setTimeout(function () {
+                oList.appendChild(oResponseLi)
+                oStatus.style.display = "none"
+
+            }, getNumberWithRange(100, 300))
+            function getNumberWithRange(min, max) {
+                return parseInt(Math.random() * (max - min + 1) + min);
+            }
+        }
+    </script>
+</body>
+
+</html>
