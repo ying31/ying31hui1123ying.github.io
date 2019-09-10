@@ -12,7 +12,7 @@
  <a href="https://ying31.github.io/ying31hui1123ying.github.io/饿了么作业/html/饿了么.html">饿了么作业</a>
  ##day15
  <a href="https://ying31.github.io/ying31hui1123ying.github.io/发现作业/html/发现.html">发现作业</a>
-
+<a href="https://ying31.github.io/ying31hui1123ying.github.io/聊天机器人/练习2.html">聊天机器人</a>
 
 
  
